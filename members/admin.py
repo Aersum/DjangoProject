@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Profile, Hobbie
+from .models import Profile, Hobby, Event
 
 admin.site.register(Profile)
-admin.site.register(Hobbie)
+admin.site.register(Hobby)
+admin.site.register(Event)
