@@ -1,0 +1,36 @@
+{% extends 'members/layout.html' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Find your event!</h1>
+      <p>
+        This is a site where you can create your own events
+        according to your preferences and find other people's events.
+        Just register on the site and add your hobbies
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Try It &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- row of columns -->
+    <div class="row">
+    {% for event in object_list %}    
+      <div class="col-md-4">
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.description }}</p>
+        <p>{{ event.place }}</p>
+        <p>
+            {% load static%}
+            <img class="{{ event.hobby.name }}" src="{% static 'members/img_trans.gif' %}" width="1" height="1">
+        </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+    {% endfor %}
+    </div>
+
+    <hr>
+
+  </div>
+{% endblock %}

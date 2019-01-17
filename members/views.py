@@ -7,7 +7,7 @@ from .models import Event
 
 class IndexView(ListView):
     model = Event
-    template_name = 'index.html'
+    template_name = 'members/index.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(IndexView, self).get_context_data()
