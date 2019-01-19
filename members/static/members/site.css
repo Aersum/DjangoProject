@@ -2,19 +2,34 @@
     font-weight: 80;
     color: blue;
 }
+.hobby-icon {
+    width: 200px;
+    height: 200px;
+    transform: scale(.4);
+    /*border: 2px solid black;*/
+}
+/*
+x-intial -50px 90px. x-step 313, y-step 231
+-50px -977px; - education
+-50px -747px; - forest
+-50px -517px; - bike
+-337px -517px; - orbitreck
+-650px -517px; - TOURING (BAGAGE)
+-973px -517px; - chess
+-973px -287px; - running
+*/
 .bike {
-    width: 100px;
-    height: 100px;
-    background: url(hobbies.jpg) -60px -70px;
+    background: url(hobbie.jpg) -50px -517px;
   }
-
-.yoga {
-    width: 100px;
-    height: 100px;
-    background: url(hobbies.jpg) -60px -70px;
-  }
+.hike{
+    background: url(hobbie.jpg) -973px -747px;
+}
 .kayak{
-    width: 100px;
-    height: 100px;
-    background: url(hobbies.jpg) -60px -70px;
+    background: url(hobbie.jpg) -337px -747px;
+}
+.yoga {
+    background: url(hobbie.jpg) -650px -287px;
+  }
+.music{
+    background: url(hobbie.jpg) -973px -56px;
 }

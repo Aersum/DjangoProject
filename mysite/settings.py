@@ -25,7 +25,7 @@ SECRET_KEY = 'fj@+i210n3qrqd_hty25=u*2ryv3nh2v8=h0*niaxj78_zgq*y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aersum.pythonanywhere.com']
+ALLOWED_HOSTS = ['aersum.pythonanywhere.com', '127.0.0.1', '192.168.8.104']
 
 
 # Application definition
@@ -120,4 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),'static')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
