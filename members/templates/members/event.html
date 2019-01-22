@@ -1,0 +1,16 @@
+{% extends 'members/layout.html' %}
+{% block title%}{{ event.title }}{% endblock %}
+{% block content %}
+    <div class="container">
+        {% load static%}
+        <h2>{{ event.title }}</h2>
+        <p><img src="{{ event.image.url }}" alt="Event image" width="100%"></p>
+        <p>Place: {{ event.place }}</p>
+        <p>Date: {{ event.date }}</p>
+        <p>by <a href="#" class="btn btn-info" role="button">{{ event.author }}</a></p>
+        <p>{{ event.description }}</p>
+        <p>
+            <img style="padding-left: -10px" class="{{ event.hobby.name }} hobby-icon" src="{% static 'members/img_trans.gif' %}" width="1" height="1">
+        </p>
+    </div>
+{% endblock %}
