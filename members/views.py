@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Event
 
 
@@ -15,8 +15,9 @@ class IndexView(ListView):
         return context
 
 
-def home(request):
-    return HttpResponse("Hello, Django!")
+class EventDetailView(DetailView):
+    model = Event
+    template_name = 'members/event.html'
 
 
 def hello_there(request, name):
