@@ -5,8 +5,11 @@
 .hobby-icon {
     width: 200px;
     height: 200px;
-    transform: scale(.4);
-    /*border: 2px solid black;*/
+    border: 1px solid black;
+    background: url(hobbie.jpg) no-repeat;
+    transform: scale(.2);
+    margin: -70px;
+    border: 2px solid black;
 }
 /*
 intial -50px 90px. x-step 313, y-step 231
@@ -19,17 +22,17 @@ intial -50px 90px. x-step 313, y-step 231
 -973px -287px; - running
 */
 .bike {
-    background: url(hobbie.jpg) -50px -517px;
+    background-position: -50px -517px;
   }
 .hike{
-    background: url(hobbie.jpg) -973px -747px;
+    background-position: -973px -747px;
 }
 .kayak{
-    background: url(hobbie.jpg) -337px -747px;
+    background-position: -337px -747px;
 }
 .yoga {
-    background: url(hobbie.jpg) -650px -287px;
+    background-position: -650px -287px;
   }
 .music{
-    background: url(hobbie.jpg) -973px -56px;
+    background-position: -973px -56px;
 }

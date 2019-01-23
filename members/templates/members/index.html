@@ -19,12 +19,9 @@
     {% for event in object_list %}
       <div class="col-md-4">
         <h2>{{ event.title }}</h2>
-        <p>{{ event.description }}</p>
         <p>{{ event.place }}</p>
-        <p>
-            {% load static%}
-            <img style="padding-left: -10px" class="{{ event.hobby.name }} hobby-icon" src="{% static 'members/img_trans.gif' %}" width="1" height="1">
-        </p>
+        <p>{{ event.description }}</p>
+        <div class="{{ event.hobby.name }} hobby-icon"></div>
         <p><a class="btn btn-secondary" href="{% url 'members:event' event.id %}" role="button">View details &raquo;</a></p>
       </div>
     {% endfor %}
