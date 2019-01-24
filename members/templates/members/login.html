@@ -1,0 +1,20 @@
+{% extends 'members/layout.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Sign in{% endblock %}
+{%  block content %}
+<div class="container">
+    <h2>Add User</h2>
+    <form action="" method="post">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-4">
+                {{ form.username|as_crispy_field}}
+            </div>
+            <div class="col-4">
+                {{ form.password|as_crispy_field }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Sign in">
+    </form>
+</div>
+{% endblock %}

@@ -17,15 +17,30 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li>
-              <a href="#" class="nav-link">
-                  <span class="fa fa-sign-in"></span>Log In
+              {% if user.is_authenticated %}
+              <a href="{% url 'members:logout' %}" class="nav-link">
+                <span class="fa fa-sign-out"></span>Sign Out
               </a>
+              {% else %}
+              <a href="{% url 'members:login' %}" class="nav-link">
+                <span class="fa fa-sign-in"></span>Sign in
+              </a>
+            {% endif %}
           </li>
             <li>
                 <a href="#" class="nav-link">
-                    <span class="fa fa-user"></span>Register
+                    <span class="fa fa-user"></span>Sign Up
                 </a>
             </li>
       </ul>
     </div>
   </nav>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+      <a href="{% url 'members:logout' %}" class="alert-link">Sign Out</a>
+    </div>
+  {% endfor %}
+{% endif %}

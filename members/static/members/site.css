@@ -2,17 +2,18 @@
     font-weight: 80;
     color: blue;
 }
+body { 
+    padding-top: 50px; 
+}
 .hobby-icon {
     width: 200px;
     height: 200px;
-    border: 1px solid black;
     background: url(hobbie.jpg) no-repeat;
     transform: scale(.2);
     margin: -70px;
-    border: 2px solid black;
 }
 /*
-intial -50px 90px. x-step 313, y-step 231
+intial -50px 90px. steps like x-step 313, y-step 231
 -50px -977px; - education
 -50px -747px; - forest
 -50px -517px; - bike
