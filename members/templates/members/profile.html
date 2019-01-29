@@ -1,0 +1,11 @@
+{% extends 'members/layout.html' %}
+{% block title%}{{ user }}{% endblock %}
+{% block content %}
+    <div class="container">
+        {% load static%}
+        <h2>{{ user }}</h2>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>Email: {{ user.last_name }}</p>
+    </div>
+{% endblock %}
