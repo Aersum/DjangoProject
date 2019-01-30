@@ -4,15 +4,21 @@
     <div class="container">
         {% load static%}
         <h2>{{ event.title }}</h2>
-        {% if event.image %}
-        <p><img src="{{ event.image.url }}" alt="Event image" width="100%"></p>
-        {% else %}
-        <p><img src="{% static 'members/no_image.jpg' %}" alt="No image"></p>
-        {% endif %}
-        <p>Place: {{ event.place }}</p>
-        <p>Date: {{ event.date }}</p>
-        <p>by <a href="#" class="btn btn-info" role="button">{{ event.author }}</a></p>
-        <p>{{ event.description }}</p>
-        <div class="{{ event.hobby.name }} hobby-icon"></div>
+        <div class="row">
+            <div class="col-md-6">
+                {% if event.image %}
+                <p><img src="{{ event.image.url }}" alt="Event image" width="100%"></p>
+                {% else %}
+                <p><img src="{% static 'members/no_image.jpg' %}" alt="No image"></p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <p>Place: {{ event.place }}</p>
+                <p>Date: {{ event.date }}</p>
+                <p>by <a href="#" class="btn btn-info" role="button">{{ event.author }}</a></p>
+                <p>{{ event.description }}</p>
+                <div class="{{ event.hobby.name }} hobby-icon"></div>
+            </div>
+        </div>
     </div>
 {% endblock %}
