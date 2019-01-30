@@ -4,8 +4,19 @@
     <div class="container">
         {% load static%}
         <h2>{{ user }}</h2>
+        <p>
+            <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" min_width="100%">
+        </p>
         <p>First Name: {{ user.first_name }}</p>
         <p>Last name: {{ user.last_name }}</p>
-        <p>Email: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>City: {{ user.profile.city }}</p>
+        <p>Birth Date: {{ user.profile.birth_date }}</p>
+        {% for hobby in user.profile.hobby.all %}
+        <a href="#" data-toggle="tooltip" title="{{ hobby.title }}">
+            <div class="{{ hobby.name }} hobby-icon" style="display: inline-block"></div>
+        </a>
+        {% endfor %}
+
     </div>
 {% endblock %}
