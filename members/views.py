@@ -1,13 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from datetime import datetime
 from django.views.generic import ListView, DetailView, FormView, View
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from .models import Event
-from members.forms import RegistrationForm
+from members.forms import RegistrationForm, EditProfileForm
 
 
 class IndexView(ListView):
@@ -56,18 +55,21 @@ class RegisterFormView(FormView):
         return super(RegisterFormView, self).form_invalid(form)
 
 
-class ProfileDetailView(DetailView):
-    model = User
-    template_name = 'members/profile.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileDetailView, self).get_context_data(**kwargs)
-        context['user'] = self.request.user
-
-
-def profile(request):
+def view_profile(request):
     args = {'user': request.user}
     return render(request, 'members/profile.html', args)
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'members/edit_profile.html', args)
 
 
 def hello_there(request, name):
