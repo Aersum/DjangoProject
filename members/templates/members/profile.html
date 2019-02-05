@@ -21,6 +21,13 @@
                     <div class="{{ hobby.name }} hobby-icon" style="display: inline-block" data-toggle="tooltip" title="{{ hobby.title }}"></div>
                 </a>
                 {% endfor %}
+                {% if user.is_authenticated %}
+                <p>
+                    <a class="btn btn-info" role="button" href="{% url 'members:edit_profile' %}">
+                        Edit
+                    </a>
+                </p>
+                {% endif %}
             </div>
         </div>
     </div>

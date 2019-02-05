@@ -2,12 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from datetime import datetime
 from django.views.generic import ListView, DetailView, FormView, View
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from .models import Event
-from members.forms import RegistrationForm
+from members.forms import RegistrationForm, EditProfileForm
 
 
 class IndexView(ListView):
@@ -63,12 +62,12 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('/profile')
     else:
-        form = UserChangeForm(instance=request.user)
+        form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'members/edit_profile.html', args)
 
