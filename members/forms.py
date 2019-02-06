@@ -41,6 +41,9 @@ class EditUserForm(UserChangeForm):
 
 
 class EditProfileForm(forms.ModelForm):
+    birth_date = forms.DateField(
+        widget=forms.TextInput(attrs={'type': 'date'})
+        )
     class Meta:
         model = models.Profile
         fields = (

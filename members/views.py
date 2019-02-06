@@ -72,13 +72,13 @@ def edit_profile(request):
             profile_form.save()
             messages.success(request, 'Your profile was successfully updated!')
             return redirect('/profile')
-        else:
-            redirect(reverse('members:edit_profile'))
-    else:
-        user_form = EditUserForm(instance=request.user)
-        profile_form = EditProfileForm(instance=request.user.profile)
-        args = {'user_form': user_form, 'profile_form': profile_form}
-        return render(request, 'members/edit_profile.html', args)
+        # else:
+        #     return redirect(reverse('members:edit_profile'))
+    # else:
+    user_form = EditUserForm(instance=request.user)
+    profile_form = EditProfileForm(instance=request.user.profile)
+    args = {'user_form': user_form, 'profile_form': profile_form}
+    return render(request, 'members/edit_profile.html', args)
 
 
 def change_password(request):
