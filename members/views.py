@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib import messages
 from .models import Event
-from members.forms import RegistrationForm, EditProfileForm
+from members.forms import RegistrationForm, EditUserForm, EditProfileForm
 
 
 class IndexView(ListView):
@@ -62,13 +62,22 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
+        user_form = EditUserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(
+            request.POST, request.FILES,
+            instance=request.user.profile
+            )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
             return redirect('/profile')
+        else:
+            redirect(reverse('members:edit_profile'))
     else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
+        user_form = EditUserForm(instance=request.user)
+        profile_form = EditProfileForm(instance=request.user.profile)
+        args = {'user_form': user_form, 'profile_form': profile_form}
         return render(request, 'members/edit_profile.html', args)
 
 
