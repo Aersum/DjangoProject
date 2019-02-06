@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from members import models
+# from django.utils.safestring import mark_safe
 
 
 class RegistrationForm(UserCreationForm):
@@ -44,6 +45,7 @@ class EditProfileForm(forms.ModelForm):
     birth_date = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date'})
         )
+
     class Meta:
         model = models.Profile
         fields = (

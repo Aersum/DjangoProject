@@ -62,7 +62,11 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        user_form = EditUserForm(request.POST, instance=request.user)
+        user_form = EditUserForm(
+            request.POST,
+            request.FILES,
+            instance=request.user
+            )
         profile_form = EditProfileForm(
             request.POST, request.FILES,
             instance=request.user.profile
@@ -72,9 +76,6 @@ def edit_profile(request):
             profile_form.save()
             messages.success(request, 'Your profile was successfully updated!')
             return redirect('/profile')
-        # else:
-        #     return redirect(reverse('members:edit_profile'))
-    # else:
     user_form = EditUserForm(instance=request.user)
     profile_form = EditProfileForm(instance=request.user.profile)
     args = {'user_form': user_form, 'profile_form': profile_form}
