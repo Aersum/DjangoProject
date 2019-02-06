@@ -44,7 +44,12 @@ class Event(models.Model):
     description = models.CharField(max_length=250, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     place = models.CharField(max_length=100, null=True, blank=True)
-    hobby = models.ForeignKey(Hobby, on_delete=models.CASCADE, default=None, null=True)
+    hobby = models.ForeignKey(
+        Hobby,
+        on_delete=models.CASCADE,
+        default=None,
+        null=True
+        )
 
     def __str__(self):
         return self.title

@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from datetime import datetime
 from django.views.generic import ListView, DetailView, FormView, View
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib import messages
 from .models import Event
-from members.forms import RegistrationForm, EditProfileForm
+from members.forms import RegistrationForm, EditUserForm, EditProfileForm
 
 
 class IndexView(ListView):
@@ -62,14 +62,38 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        user_form = EditUserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(
+            request.POST, request.FILES,
+            instance=request.user.profile
+            )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('/profile')
+        else:
+            redirect(reverse('members:edit_profile'))
+    else:
+        user_form = EditUserForm(instance=request.user)
+        profile_form = EditProfileForm(instance=request.user.profile)
+        args = {'user_form': user_form, 'profile_form': profile_form}
+        return render(request, 'members/edit_profile.html', args)
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/profile')
+            update_session_auth_hash(request, form.user)
+            return redirect(reverse('members:profile'))
+        else:
+            redirect(reverse('members:profile'))
     else:
-        form = EditProfileForm(instance=request.user)
+        form = PasswordChangeForm(user=request.user)
         args = {'form': form}
-        return render(request, 'members/edit_profile.html', args)
+        return render(request, 'members/change_password.html', args)
 
 
 def hello_there(request, name):
