@@ -41,9 +41,6 @@ class EditUserForm(UserChangeForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    birth_date = forms.DateField(
-        widget=forms.TextInput(attrs={'type': 'date'})
-        )
 
     class Meta:
         model = models.Profile
@@ -53,3 +50,10 @@ class EditProfileForm(forms.ModelForm):
             'image',
             'hobby'
         )
+    birth_date = forms.DateField(
+        widget=forms.TextInput(attrs={'type': 'date'})
+        )
+    hobby = forms.ModelMultipleChoiceField(
+            widget=forms.CheckboxSelectMultiple,
+            queryset=models.Hobby.objects.all(),
+            required=True)
