@@ -67,8 +67,7 @@ class NewEventForm(forms.ModelForm):
         required=False,
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 40})
         )
-    hobby = forms.ModelChoiceField(queryset=models.Hobby.objects.all())
 
     class Meta:
         model = models.Event
-        exclude = ('author',)
+        exclude = ('author', )
