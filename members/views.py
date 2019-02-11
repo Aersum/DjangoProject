@@ -137,4 +137,9 @@ class EventUpdateView(UpdateView):
     form_class = NewEventForm
 
     def get_success_url(self):
-        return reverse('event', args=(self.object.id, ))
+        return reverse('members:event', args=(self.object.id, ))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(EventUpdateView, self).get_context_data()
+        context['hobby'] = self.request.user.profile.hobby.all()
+        return context
