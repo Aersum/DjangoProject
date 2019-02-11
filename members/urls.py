@@ -11,4 +11,10 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('hello/<name>', views.hello_there, name='hello_there'),
     path('profile/password/', views.change_password, name='change_password'),
+    path('event/add/', views.EventCreateView.as_view(), name='add_event'),
+    path(
+        'event/update/<int:pk>',
+        views.EventUpdateView.as_view(),
+        name='update_event'
+        ),
 ]

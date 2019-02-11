@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+<form action="" method="post" enctype="multipart/form-data">
+    <div>
+        {% csrf_token %}
+        {{ form.image|as_crispy_field}}
+        {{ form.title|as_crispy_field}}
+        {{ form.description|as_crispy_field}}
+        {{ form.date|as_crispy_field}}
+        {{ form.place|as_crispy_field}}
+        <div id="div_id_hobby" class="form-group">
+            <label for="id_hobby" class="col-form-label  requiredField">
+                Hobby<span class="asteriskField">*</span>
+            </label>
+            <div class="">
+                <select name="hobby" class="select form-control" required="" id="id_hobby">
+                    <option value="" selected="">---------</option>
+                    {% for h in hobby %}
+                    <option value="{{h.id}}">{{h.title}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
+</form>

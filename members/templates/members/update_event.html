@@ -1,0 +1,11 @@
+{% extends 'members/layout.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Update Event{% endblock %}
+{%  block content %}
+<div class="container">
+    <div class="col-md-6">
+        <h2>Update Event</h2>
+        {% include 'members/event_form.html' %}
+    </div>
+</div>
+{% endblock %}

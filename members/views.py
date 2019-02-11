@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from datetime import datetime
-from django.views.generic import ListView, DetailView, FormView, View
+from django.views.generic import (
+    ListView, DetailView, FormView, View, CreateView, UpdateView
+    )
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib import messages
 from .models import Event
-from members.forms import RegistrationForm, EditUserForm, EditProfileForm
+from members.forms import (
+    RegistrationForm, EditUserForm, EditProfileForm, NewEventForm
+    )
 
 
 class IndexView(ListView):
@@ -106,3 +110,36 @@ def hello_there(request, name):
             'date': datetime.now()
         }
     )
+
+
+class EventCreateView(CreateView):
+    model = Event
+    template_name = 'members/add_event.html'
+    form_class = NewEventForm
+
+    def get_success_url(self):
+        return reverse('members:event', args=(self.object.id, ))
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(EventCreateView, self).get_context_data()
+        context['hobby'] = self.request.user.profile.hobby.all()
+        return context
+
+
+class EventUpdateView(UpdateView):
+    model = Event
+    template_name = 'members/update_event.html'
+    form_class = NewEventForm
+
+    def get_success_url(self):
+        return reverse('members:event', args=(self.object.id, ))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(EventUpdateView, self).get_context_data()
+        context['hobby'] = self.request.user.profile.hobby.all()
+        return context

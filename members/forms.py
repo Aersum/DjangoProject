@@ -57,3 +57,17 @@ class EditProfileForm(forms.ModelForm):
             widget=forms.CheckboxSelectMultiple,
             queryset=models.Hobby.objects.all(),
             required=True)
+
+
+class NewEventForm(forms.ModelForm):
+    date = forms.DateField(
+        widget=forms.TextInput(attrs={'type': 'date'})
+        )
+    description = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 40})
+        )
+
+    class Meta:
+        model = models.Event
+        exclude = ('author', )
